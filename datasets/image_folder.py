@@ -64,7 +64,7 @@ class ImageFolder(Dataset):
         x = self.files[idx % len(self.files)]
 
         if self.cache == 'none':
-            return self.img_process(x)
+            return self.img_process(x), x.split("/")[-1]
         elif self.cache == 'in_memory':
             return x
 

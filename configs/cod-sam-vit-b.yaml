@@ -2,8 +2,10 @@ train_dataset:
   dataset:
     name: paired-image-folders
     args:
-      root_path_1: /public2/home/chaotao/datasets/codDataset/train/img
-      root_path_2: /public2/home/chaotao/datasets/codDataset/train/gt
+      #root_path_1: ./load/CAMO/Images/Train
+      #root_path_2: ./load/CAMO/GT
+      root_path_1: ../hiertext/data/train
+      root_path_2: ../hiertext/Hiertext_GT/train/line
       cache: none
       split_key: train
   wrapper:
@@ -17,8 +19,8 @@ val_dataset:
   dataset:
     name: paired-image-folders
     args:
-      root_path_1: /public2/home/chaotao/datasets/COD/TestDataset/COD10K/Imgs
-      root_path_2: /public2/home/chaotao/datasets/COD/TestDataset/COD10K/GT
+      root_path_1: ../hiertext/data/validation
+      root_path_2: ../hiertext/Hiertext_GT/validation/line
       cache: none
       split_key: test
   wrapper:
@@ -26,22 +28,23 @@ val_dataset:
     args:
       inp_size: 1024
   batch_size: 2
-
-test_dataset:
-  dataset:
-    name: paired-image-folders
-    args:
-      root_path_1: /public2/home/chaotao/datasets/COD/TestDataset/COD10K/Imgs
-      root_path_2: /public2/home/chaotao/datasets/COD/TestDataset/COD10K/GT
-      cache: none
-      split_key: test
-  wrapper:
-    name: val
-    args:
-      inp_size: 1024
-  batch_size: 1
+    #
+    #test_dataset:
+    #  dataset:
+    #    name: paired-image-folders
+    #    args:
+    #      root_path_1: /public2/home/chaotao/datasets/COD/TestDataset/COD10K/Imgs
+    #      root_path_2: /public2/home/chaotao/datasets/COD/TestDataset/COD10K/GT
+    #      cache: none
+    #      split_key: test
+    #  wrapper:
+    #    name: val
+    #    args:
+    #      inp_size: 1024
+    #  batch_size: 1
 
 eval_type: cod
+  #sam_checkpoint: ./save/_cod-sam-vit-b/model_epoch_189.pth
 sam_checkpoint: ./pretrained/sam_vit_b_01ec64.pth
 data_norm:
   inp:
@@ -95,7 +98,7 @@ optimizer:
   args:
     lr: 0.0002
 lr_min: 1.0e-7
-epoch_max: 20
+epoch_max: 300
 
 multi_step_lr:
   milestones:
@@ -104,5 +107,5 @@ multi_step_lr:
 epoch_val: 1
 epoch_save: 1
 
-#resume: 60
-#start_epoch: 60
+  #resume: 221
+  #start_epoch: 221

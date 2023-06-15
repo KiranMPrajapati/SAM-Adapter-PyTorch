@@ -92,8 +92,9 @@ class TrainDataset(Dataset):
         return len(self.dataset)
 
     def __getitem__(self, idx):
-        img, mask = self.dataset[idx]
-
+        img_info, mask_info = self.dataset[idx]
+        img, img_name = img_info
+        mask, _ = mask_info
         # random filp
         if random.random() < 0.5:
             img = img.transpose(Image.FLIP_LEFT_RIGHT)
@@ -104,5 +105,6 @@ class TrainDataset(Dataset):
 
         return {
             'inp': self.img_transform(img),
-            'gt': self.mask_transform(mask)
+            'gt': self.mask_transform(mask),
+            'image_name': img_name
         }
